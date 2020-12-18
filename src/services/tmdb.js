@@ -36,8 +36,6 @@ const tmdb = () => {
 
                 const [, w780] = poster_sizes;
 
-                console.log(configuration);
-
                 return {
                     base_url: `${base_url}${w780}`,
                     secure_base_url: `${secure_base_url}${w780}`,

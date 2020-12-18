@@ -4,19 +4,17 @@ import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-function ColumnSort({ columns = [], handleSelection }) {
+function ColumnSort({ columns, handleSelection, sortField }) {
     const Option = (col, selected = false) => {
         const { id, name } = col;
 
-        return <option value={id} selected>{name}</option>
+        return <option value={id} selected={id === sortField}>{name}</option>
     };
 
     const handleColumnSelected = (e) => {
         e.preventDefault();
 
-        console.log(e);
-
-        handleSelection({test: 'test'});
+        handleSelection(e.target.value);
     };
 
     return (
@@ -32,12 +30,10 @@ function ColumnSort({ columns = [], handleSelection }) {
                         <p>Sort Results By</p>
 
                         <select required className="form-control" onChange={handleColumnSelected}>
-                            <option value="default">Default</option>
-
                             {
                                 columns.map(c => (
                                     <React.Fragment key={c.id}>
-                                        {Option(c)}
+                                        {Option(c, sortField)}
                                     </React.Fragment>
                                 ))
                             }
@@ -51,6 +47,7 @@ function ColumnSort({ columns = [], handleSelection }) {
 
 ColumnSort.propTypes = {
     columns: PropType.array.isRequired,
+    sortField: PropType.string.isRequired,
 };
 
 export default ColumnSort;

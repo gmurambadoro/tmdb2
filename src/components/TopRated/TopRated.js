@@ -6,8 +6,12 @@ import ColumnSort from "../ColumnSort/ColumnSort";
 import Movies from "../Movies/Movies";
 
 function TopRated({ configuration }) {
+    const DEFAULT_SORT_FIELD = {id: 'default', name: 'Default'};
+
+    const [sortField, setSortField] = useState(DEFAULT_SORT_FIELD.id);
+
     const [movies, setMovies] = useState([]); // top-rated movies
-    const [currentPage, setCurrentPage] = useState(1);
+
     const [pagination, setPagination] = useState({
         currentPage: 1,
         totalPages: 1,
@@ -25,19 +29,22 @@ function TopRated({ configuration }) {
 
     useEffect(() => paginateMovies(1), [configuration]);
 
-    useEffect(() => paginateMovies(currentPage), [currentPage]);
+    useEffect(() => paginateMovies(pagination.currentPage), [pagination.currentPage]);
 
-    const changeDefaultSort = (col) => {
-        console.log(col);
+    const changeDefaultSort = (field) => {
+        setSortField(field);
+
+        console.log(field);
     }
 
     const sortColumns = [
+        DEFAULT_SORT_FIELD,
         {
-            id: 'title_az',
+            id: 'title.asc',
             name: 'Title (A-Z)',
         },
         {
-            id: 'title_za',
+            id: 'title.desc',
             name: 'Title (Z-A)',
         },
     ];
@@ -45,13 +52,20 @@ function TopRated({ configuration }) {
     return (
         <Row>
             <Col md={3}>
-                <ColumnSort columns={sortColumns} handleSelection={changeDefaultSort} />
+                <ColumnSort
+                    columns={sortColumns}
+                    handleSelection={changeDefaultSort}
+                    sortField={sortField}
+                />
             </Col>
 
             <Col>
                 <h3>Top Rated Movies</h3>
 
-                <Movies movies={[...(movies.results || [])]} baseURL={configuration.base_url} />
+                <Movies
+                    movies={[...(movies.results || [])]}
+                    baseURL={configuration.base_url || ''}
+                />
             </Col>
         </Row>
     );
