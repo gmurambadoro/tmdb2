@@ -34,11 +34,13 @@ const tmdb = () => {
 
                 const { base_url, secure_base_url, poster_sizes  } = configuration.images;
 
-                const [size] = poster_sizes;
+                const [, w780] = poster_sizes;
+
+                console.log(configuration);
 
                 return {
-                    base_url: `${base_url}${size}`,
-                    secure_base_url: `${secure_base_url}${size}`,
+                    base_url: `${base_url}${w780}`,
+                    secure_base_url: `${secure_base_url}${w780}`,
                     api_key: getApiKey(),
                 };
             } catch (e) {

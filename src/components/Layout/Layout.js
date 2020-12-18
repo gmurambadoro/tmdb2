@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import {Button, Container} from "react-bootstrap";
 import {Route, Switch} from "react-router";
 import TopRated from "../TopRated/TopRated";
+import './Layout.css';
 
 function Layout({ apiKey, handleApiKeyChanged, configuration}) {
     const changeApiKey = () => {
