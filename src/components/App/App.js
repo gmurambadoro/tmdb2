@@ -13,7 +13,8 @@ export default function App() {
     }, [apiKeyState]); // retrieve the API key from local storage
 
     useEffect(() => {
-        tmdb().configuration()
+        tmdb()
+            .configuration()
             .then(data => setConfiguration(data));
     }, [apiKeyState]); // retrieve the configuration every time the api_key is changed
 
