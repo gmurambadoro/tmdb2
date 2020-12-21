@@ -33,8 +33,6 @@ function TopRated({ configuration }) {
 
     const changeDefaultSort = (field) => {
         setSortField(field);
-
-        console.log(field);
     }
 
     const sortColumns = [
@@ -48,6 +46,24 @@ function TopRated({ configuration }) {
             name: 'Title (Z-A)',
         },
     ];
+
+    const sortMovies = (data) => {
+        const [title, direction] = sortField.split('.');
+
+        switch (title) {
+            case 'title':
+                if (direction !== 'asc') {
+                    return data.sort((m1, m2) => m1.title < m2.title);
+                }
+
+                return data.sort((m1, m2) => m1.title >= m2.title);
+
+            default:
+                return data;
+        }
+    };
+
+    const sortedMovies = sortMovies([...movies.results || []]);
 
     return (
         <Row>
@@ -63,7 +79,7 @@ function TopRated({ configuration }) {
                 <h3>Top Rated Movies</h3>
 
                 <Movies
-                    movies={[...(movies.results || [])]}
+                    movies={sortedMovies}
                     baseURL={configuration.base_url || ''}
                 />
             </Col>

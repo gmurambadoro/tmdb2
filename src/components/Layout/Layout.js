@@ -12,7 +12,7 @@ function Layout({ apiKey, handleApiKeyChanged, configuration}) {
     const changeApiKey = () => {
         const key = String(prompt('Enter your API key from TMDB: ') || '').trim().toString();
 
-        if (!key) return ;
+        if (!key) return;
 
         handleApiKeyChanged(key);
     };
