@@ -3,29 +3,25 @@ import tmdb, {getApiKey as storageGetApiKey, setApiKey as storageSetApiKey} from
 import Layout from "../Layout/Layout";
 
 export default function App() {
-    const [apiKeyState, setApiKeyState] = useState('');
+    const [apiKey, setApiKey] = useState('');
     const [configuration, setConfiguration] = useState(null);
 
-    useEffect(() => {
-        const key = storageGetApiKey();
-
-        setApiKeyState(key);
-    }, [apiKeyState]); // retrieve the API key from local storage
+    useEffect(() => setApiKey(storageGetApiKey()), [apiKey]); // retrieve the API key from local storage
 
     useEffect(() => {
         tmdb()
             .configuration()
             .then(data => setConfiguration(data));
-    }, [apiKeyState]); // retrieve the configuration every time the api_key is changed
+    }, [apiKey]); // retrieve the configuration every time the api_key is changed
 
     const handleApiKeyChanged = (key) => {
         storageSetApiKey(key || null);
-        setApiKeyState(key || null);
+        setApiKey(key); // explicitly set the api key in the state to force a rerender
     };
 
     return (
         <Layout
-            apiKey={apiKeyState}
+            apiKey={apiKey}
             handleApiKeyChanged={handleApiKeyChanged}
             configuration={configuration || {}}
         />
