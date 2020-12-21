@@ -19,9 +19,7 @@ function MovieDetail({match, configuration, ...props}) {
         return <p>Please wait...</p>;
     }
 
-    console.log(movie);
-
-    return <Movie {...props} movie={movie} baseURL={configuration.baseURL || ''} detailedCard={true} />
+    return <Movie {...props} movie={movie} baseURL={configuration.base_url || ''} detailedCard={true} />
 }
 
 export default MovieDetail;

@@ -5,7 +5,7 @@ import Movie from "../Movie/Movie";
 
 function Movies({ movies, baseURL, ...props }) {
     if (!movies.length) {
-        return <p>No data found!</p>;
+        return <p>Please wait...</p>;
     }
 
     const moviesCollectionComponent = movies.map(m => {

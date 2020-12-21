@@ -29,12 +29,13 @@ const tmdb = () => {
     return {
         configuration: async () => {
             try {
-                const configuration = await get('/configuration')
-                    .then(data => data.data);
+                const configuration = await get('/configuration').then(data => data.data);
 
-                const { base_url, secure_base_url, poster_sizes  } = configuration.images;
+                console.log(configuration);
 
-                const [, w780] = poster_sizes;
+                const { base_url, secure_base_url, backdrop_sizes  } = configuration.images;
+
+                const [, w780] = backdrop_sizes;
 
                 return {
                     base_url: `${base_url}${w780}`,

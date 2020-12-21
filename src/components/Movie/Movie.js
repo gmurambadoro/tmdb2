@@ -11,12 +11,9 @@ function Movie({ movie, baseURL, detailedCard = false }) {
 
     const styles = {
         card: {
-            minHeight: '350px',
             cursor: 'pointer',
         },
         image: {
-            height: '70%',
-            minHeight: '300px',
             width: 'auto',
             objectFit: 'cover',
         },
@@ -25,8 +22,6 @@ function Movie({ movie, baseURL, detailedCard = false }) {
         },
     }
 
-    console.log(detailedCard);
-
     if (detailedCard === true) {
         if (!title) {
             return <p>Please wait...</p>
@@ -34,6 +29,13 @@ function Movie({ movie, baseURL, detailedCard = false }) {
 
         return (
             <React.Fragment>
+                <img style={{
+                    ...styles.image,
+                    width: 400,
+                }}
+                    src={imageSrc}
+                    alt={title}
+                />
                 <h2>{title}</h2>
 
                 <p className={"text-muted"}>
