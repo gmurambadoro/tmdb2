@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Card, Col, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import Movie from "../Movie/Movie";
 
-function Movies({ movies, baseURL }) {
+function Movies({ movies, baseURL, ...props }) {
     if (!movies.length) {
         return <p>No data found!</p>;
     }
@@ -11,7 +11,7 @@ function Movies({ movies, baseURL }) {
     const moviesCollectionComponent = movies.map(m => {
         return (
             <Col md={4} key={m.id}>
-                <Movie movie={m} baseURL={baseURL} />
+                <Movie {...props} movie={m} baseURL={baseURL} />
             </Col>
         );
     });

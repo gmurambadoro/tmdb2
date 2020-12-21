@@ -5,7 +5,7 @@ import {Col, Row} from "react-bootstrap";
 import ColumnSort from "../ColumnSort/ColumnSort";
 import Movies from "../Movies/Movies";
 
-function TopRated({ configuration }) {
+function TopRated({ configuration, ...props }) {
     const DEFAULT_SORT_FIELD = {id: 'default', name: 'Default'};
 
     const [sortField, setSortField] = useState(DEFAULT_SORT_FIELD.id);
@@ -81,6 +81,7 @@ function TopRated({ configuration }) {
                 <Movies
                     movies={sortedMovies}
                     baseURL={configuration.base_url || ''}
+                    {...props}
                 />
             </Col>
         </Row>

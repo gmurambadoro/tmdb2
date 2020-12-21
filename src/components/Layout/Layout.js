@@ -7,8 +7,9 @@ import {Button, Container} from "react-bootstrap";
 import {Route, Switch} from "react-router";
 import TopRated from "../TopRated/TopRated";
 import './Layout.css';
+import MovieDetail from "../MovieDetail/MovieDetail";
 
-function Layout({ apiKey, handleApiKeyChanged, configuration}) {
+function Layout({ apiKey, handleApiKeyChanged, configuration, ...props}) {
     const changeApiKey = () => {
         const key = String(prompt('Enter your API key from TMDB: ') || '').trim().toString();
 
@@ -45,7 +46,13 @@ function Layout({ apiKey, handleApiKeyChanged, configuration}) {
                         <Route
                             path="/"
                             exact
-                            render={() => <TopRated configuration={configuration || {}} />}
+                            render={(props) => <TopRated {...props} configuration={configuration || {}} />}
+                        />
+
+                        <Route
+                            path={"/movie/:id"}
+                            exact
+                            render={(props) => <MovieDetail {...props} configuration={configuration || {}} />}
                         />
                     </Switch>
                 </Container>
